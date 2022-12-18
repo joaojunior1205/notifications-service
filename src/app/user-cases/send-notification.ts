@@ -28,8 +28,6 @@ export class SendNotification {
 
         await this.notificationRepository.create(notification);
 
-        return {
-            notification,
-        };
+        return { notification };
     }
 }
