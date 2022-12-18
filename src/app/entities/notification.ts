@@ -1,3 +1,5 @@
+import { randomUUID } from "crypto";
+import { Replace } from "src/helpers/replate";
 import { Content } from "./content";
 
  export interface NotificationProps {
@@ -8,11 +10,20 @@ import { Content } from "./content";
     createAt: Date
  }
  
- export class notification {
+ export class Notification {
+    private _id: string;
     private props: NotificationProps;
 
-    constructor(props: NotificationProps) {
-        this.props = props;
+    constructor(props: Replace<NotificationProps, {createAt?: Date}>) {
+        this._id = randomUUID();
+        this.props = {
+          ...props,
+          createAt: props.createAt ?? new Date()
+        };
+    }
+
+    public get id() {
+        return this._id;
     }
 
     public set recipientId(recipientId: string) {
