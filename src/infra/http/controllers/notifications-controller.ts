@@ -17,8 +17,6 @@ export class NotificationsController {
       category,
     });
 
-    console.log(notification)
-
     return { notification };
   }
 }
