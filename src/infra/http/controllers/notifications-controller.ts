@@ -3,7 +3,7 @@ import { Body, Post } from '@nestjs/common/decorators';
 import { SendNotification } from 'src/app/user-cases/send-notification';
 import { CreateNotificationBody } from '../dtos/create-notification-body';
 
-@Controller('notifications')
+@Controller('notification')
 export class NotificationsController {
   constructor(private sendNotification: SendNotification) { }
 
@@ -17,6 +17,14 @@ export class NotificationsController {
       category,
     });
 
-    return { notification };
+
+    return {
+      notification: {
+        id: notification.id,
+        content: notification.content.value,
+        category: notification.category,
+        recipientId: notification.recipientId,
+      }
+    }
   }
 }
